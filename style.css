@@ -1,0 +1,409 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('bgimage.jpg') no-repeat center center fixed;
+    background-size: cover;
+    z-index: -1;
+    transition: background 0.4s ease;
+}
+
+body.dark::before {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('bgimage.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+body.light::before {
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
+        url('bgimage.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 70px auto 20px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.93);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+}
+
+body.light .container {
+    background: rgba(240, 240, 240, 0.93);
+    color: #111;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+h3 {
+    font-weight: bold;
+    text-align: center;
+    color: #e0f7ff;
+}
+
+body.light h3 {
+    color: #080808;
+}
+
+label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+textarea {
+    margin-top: 3px;
+    width: 100%;
+    height: 200px;
+    resize: vertical;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(116, 106, 106, 0.7);
+    background: rgba(255, 255, 255, 0.1);
+    color: inherit;
+}
+
+textarea::placeholder {
+    color: #868383;
+}
+
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 10px #00ffe1;
+}
+
+.btn-group {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.tooltip-custom {
+    position: relative;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 6px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.tooltip-custom:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+#numberCountBox {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    border-radius: 10px;
+    padding: 8px 20px;
+    font-weight: 200;
+    font-size: 18px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+body.light #numberCountBox {
+    background: #5c5b5b;
+    color: #fff;
+}
+
+.prefix-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+#prefixInput {
+    max-width: 130px;
+    min-width: 100px;
+    width: 100%;
+    font-size: 15px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(116, 106, 106, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    color: inherit;
+    outline: none; 
+    box-shadow: none;
+}
+
+body.light #prefixInput,
+body.light textarea {
+    background: rgba(73, 65, 65, 0.15);
+    color: #111;
+    border: 1px solid rgba(145, 22, 22. 0.5);
+}
+
+body.light textarea::placeholder,
+body.light #prefixInput::placeholder {
+    color: #3d3b3b;
+}
+
+#prefixInput:focus {
+    outline: none;
+    border: 1px solid #00ffe1;
+    box-shadow: 0 0 10px #00ffe1;
+}
+
+#applyprefix,
+#removeprefix {
+    min-width: 100px;
+    max-width: 140px;
+}
+
+button {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    margin-top: auto;
+    background: rgba(0, 0, 0, 0.85);
+    color: #f8f8f8;
+    text-align: center;
+    padding: 15px;
+    font-size: 18px;
+    backdrop-filter: blur(4px);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+body.light footer {
+    background: rgba(220, 220, 220, 0.85);
+    color: #000;
+    font-size: 18px;
+    border-top: 1px solid black;
+}
+
+@media (max-width: 576px) {
+    .container {
+        margin: 90px 10px 20px;
+        padding: 20px;
+        border-radius: 14px;
+        width: calc(100% - 30px);
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    textarea {
+        height: 150px;
+        font-size: 14px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .prefix-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #prefixInput,
+    #applyprefix,
+    #removeprefix {
+        width: 100%;
+    }
+
+    #numberCountBox {
+        width: 100%;
+        justify-content: center;
+        font-size: 16px;
+    }
+
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+    }
+}
+
+body.light textarea {
+    background: rgba(204, 141, 163, 0.3);
+    color: #000000;
+    border: 1px solid #b89dac;
+}
+
+body.light textarea:focus {
+    box-shadow: 0 0 10px #ff4d94;
+    border: 1px solid #ff4d94;
+}
+
+body.light #prefixInput:focus {
+    box-shadow: 1px 1px 10px #f52679;
+    border: 1px solid rgba(220, 220, 220, 0.85);
+    outline: none;
+}
+
+body.light #prefixInput{
+    background: rgba(204, 141, 163, 0.3);
+    color: #000000;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    outline: none;
+    box-shadow: none;
+}
+
+@media (max-width: 700px) {
+    .container {
+        margin: 70px 10px 20px;
+        padding: 20px;
+        border-radius: 14px;
+        width: calc(100% - 100px);
+        min-height: 75vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    textarea {
+        height: 30vh;
+        font-size: 14px;
+        resize: vertical;
+    }
+
+    .btn-group {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .prefix-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    #prefixInput,
+    #applyprefix,
+    #removeprefix {
+        width: 100%;
+    }
+
+    #numberCountBox {
+        font-size: 14px;
+        padding: 6px 12px;
+        height: auto;
+        max-width: 100px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .container {
+        margin: 70px auto 20px;
+        padding: 20px;
+        border-radius: 14px;
+        width: calc(100% - 30px);
+        min-height: 75vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    textarea {
+        height: 30vh;
+        font-size: 14px;
+        resize: vertical;
+    }
+
+    .btn-group {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .prefix-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    #prefixInput,
+    #applyprefix,
+    #removeprefix {
+        width: 100%;
+    }
+
+    #numberCountBox {
+        font-size: 14px;
+        padding: 6px 12px;
+        height: auto;
+        max-width: 100px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+    }
+}
+
